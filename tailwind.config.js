@@ -10,19 +10,26 @@ export default {
         silver: {
           dark: '#A8BFC9',
           light: '#DBE8ED',
+          darker: '#6B8997',
         },
         navy: {
           dark: '#1A2A33',
           semidark: '#1F3641',
+          darker: '#10212A',
         },
         blue: {
           light: '#31C3BD',
           hover: '#65E9E4',
+          dark: '#118C87',
         },
         yellow: {
           light: '#F2B137',
           hover: '#FFC860',
+          dark: '#CC8B13',
         },
+      },
+      boxShadow: {
+        inner: 'inset 0 -8px 0 0',
       },
     },
     fontFamily: {
