@@ -1,26 +1,23 @@
-import { useState } from 'react';
-import GameBox, { GameBoxState } from './GameBox';
+import GameBox from './GameBox';
+import { useDispatch, useSelector } from 'react-redux';
+import { addPiece } from '../store/gameSlice';
 
 export default function GameBoxGrid() {
-  const [gameArr, setGameArr] = useState([
-    [GameBoxState.Empty, GameBoxState.Empty, GameBoxState.Empty],
-    [GameBoxState.Empty, GameBoxState.Empty, GameBoxState.Empty],
-    [GameBoxState.Empty, GameBoxState.Empty, GameBoxState.Empty],
-  ]);
+  // const [boardState, setBoardState] = useState(initialBoardState);
+  // const [currentPlayer, setCurrentPlayer] = useState(0);
+
+  const boardState = useSelector(state => state.game.boardState);
+  const dispatch = useDispatch();
 
   function handleClick(pos) {
     const { x, y } = pos;
 
-    setGameArr(prev => {
-      const newArr = [...prev];
-      newArr[x][y] = GameBoxState.O;
-      return newArr;
-    });
+    dispatch(addPiece({ x, y }));
   }
 
   return (
     <div className="grid grid-cols-3 grid-rows-3 gap-5">
-      {gameArr.map((row, rowIdx) =>
+      {boardState.map((row, rowIdx) =>
         row.map((col, colIdX) => <GameBox key={`${rowIdx}, ${colIdX}`} state={col} onClick={() => handleClick({ x: rowIdx, y: colIdX })} />)
       )}
     </div>

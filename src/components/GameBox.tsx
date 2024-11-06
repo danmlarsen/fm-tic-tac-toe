@@ -2,9 +2,9 @@ import IconX from '../assets/icon-x.svg';
 import IconO from '../assets/icon-o.svg';
 
 export enum GameBoxState {
+  Empty,
   X,
   O,
-  Empty,
 }
 
 type AppProps = {
