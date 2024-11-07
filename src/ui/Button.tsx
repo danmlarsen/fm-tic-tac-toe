@@ -26,7 +26,7 @@ export default function Button({ children, onClick, type = ButtonType.Primary, c
   if (color === ButtonColor.silver) classes += 'shadow-silver-darker bg-silver-dark';
 
   return (
-    <button className={`${classes} shadow-inner rounded-2xl font-bold text-navy-dark pt-4 `} onClick={onClick}>
+    <button className={`${classes} uppercase shadow-inner rounded-2xl font-bold text-navy-dark pt-4 `} onClick={onClick}>
       {children}
     </button>
   );
