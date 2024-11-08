@@ -8,9 +8,9 @@ export default function Header() {
   const { gameState } = useSelector(state => state.game);
 
   return (
-    <header className={`flex items-center ${gameState === GameState.Started ? 'justify-between' : 'justify-center'}`}>
+    <header className={`flex items-center ${gameState === GameState.NewGame ? 'justify-center' : 'justify-between'}`}>
       <Logo />
-      {gameState === GameState.Started && (
+      {gameState !== GameState.NewGame && (
         <>
           <TurnDisplay isX={true} />
           <RestartButton />

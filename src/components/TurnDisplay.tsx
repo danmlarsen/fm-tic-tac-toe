@@ -8,8 +8,6 @@ export default function TurnDisplay() {
   const currentPlayer = useSelector(state => state.game.currentPlayer);
   const isX = currentPlayer === 0;
 
-  console.log('test');
-
   return (
     <Box className="flex gap-4 items-center justify-center">
       <img className="size-5" src={isX ? IconX : IconO} alt={`${isX ? 'X' : 'O'} icon`} />

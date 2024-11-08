@@ -1,13 +1,16 @@
 import GameBox from './GameBox';
 import { useDispatch, useSelector } from 'react-redux';
-import { addMove } from '../store/gameSlice';
+import { addMove, getIsCurPlayerCpu } from '../store/gameSlice';
 
 export default function GameBoxGrid() {
-  const boardState = useSelector(state => state.game.boardState);
+  const { boardState } = useSelector(state => state.game);
+  const isCurPlayerCpu = useSelector(getIsCurPlayerCpu);
   const filledBoxes = useSelector(state => state.game.filledCoords);
   const dispatch = useDispatch();
 
   function handleClick(pos) {
+    if (isCurPlayerCpu) return;
+
     const { x, y } = pos;
 
     dispatch(addMove({ x, y }));
