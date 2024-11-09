@@ -1,17 +1,7 @@
 import { useEffect } from 'react';
 import { addMove, GameState, getIsCurPlayerCpu } from '../store/gameSlice';
-import { GameBoxState } from '../components/GameBox';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-
-function getEmptyCells(boardState: number[][]) {
-  const coordsArr: { x: number; y: number }[] = [];
-  boardState.forEach((row, x) => {
-    row.forEach((col, y) => {
-      if (col === GameBoxState.Empty) coordsArr.push({ x, y });
-    });
-  });
-  return coordsArr;
-}
+import { getEmptyCells } from '../utils/utils';
 
 function getNextMove(boardState: number[][]) {
   const emptyCells = getEmptyCells(boardState);
@@ -28,6 +18,8 @@ export function useComputerPlayer() {
   useEffect(() => {
     if (isCurPlayerCpu && gameState === GameState.Playing) {
       setTimeout(() => {
+        if (gameState !== GameState.Playing) return;
+
         const nextMove = getNextMove(boardState);
         dispatch(addMove(nextMove));
       }, 1000);

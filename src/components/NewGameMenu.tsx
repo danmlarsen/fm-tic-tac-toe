@@ -2,46 +2,17 @@ import Button, { ButtonColor, ButtonType } from '../ui/Button';
 import Header from './Header';
 import { startGame } from '../store/gameSlice';
 import MarkSelect from './MarkSelect';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { useAppDispatch } from '../store/hooks';
 
 export default function NewGameMenu() {
-  const { player1IsX: isX } = useAppSelector(state => state.game);
   const dispatch = useAppDispatch();
 
   function startGameVsCPU() {
-    if (isX) {
-      dispatch(
-        startGame([
-          { name: 'YOU', cpu: false },
-          { name: 'CPU', cpu: true },
-        ])
-      );
-    } else {
-      dispatch(
-        startGame([
-          { name: 'CPU', cpu: true },
-          { name: 'YOU', cpu: false },
-        ])
-      );
-    }
+    dispatch(startGame({ player2IsCpu: true }));
   }
 
   function startGameVsPlayer() {
-    if (isX) {
-      dispatch(
-        startGame([
-          { name: 'P1', cpu: false },
-          { name: 'P2', cpu: false },
-        ])
-      );
-    } else {
-      dispatch(
-        startGame([
-          { name: 'P2', cpu: false },
-          { name: 'P1', cpu: false },
-        ])
-      );
-    }
+    dispatch(startGame({ player2IsCpu: false }));
   }
 
   return (

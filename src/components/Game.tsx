@@ -1,4 +1,3 @@
-import GameBoxGrid from './GameBoxGrid';
 import GameScore from './GameScore';
 import Header from './Header';
 import { GameState } from '../store/gameSlice';
@@ -7,6 +6,7 @@ import RestartGameModal from './RestartGameModal';
 import { useComputerPlayer } from '../hooks/useComputerPlayer';
 import { useGameController } from '../hooks/useGameController';
 import { useAppSelector } from '../store/hooks';
+import GameBoard from './GameBoard';
 
 export default function Game() {
   const { gameState } = useAppSelector(state => state.game);
@@ -21,7 +21,7 @@ export default function Game() {
 
       <div className="space-y-5">
         <Header />
-        <GameBoxGrid />
+        <GameBoard />
         <GameScore />
       </div>
     </>

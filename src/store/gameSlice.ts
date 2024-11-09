@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { GameBoxState } from '../components/GameBox';
+import { GameBoxState } from '../components/GameBoardCell';
 import { RootState } from './store';
 
 export enum GameState {
@@ -26,11 +26,10 @@ const initialState = {
     [GameBoxState.Empty, GameBoxState.Empty, GameBoxState.Empty],
   ],
   filledCoords: [] as filledCoords[],
-  player1IsX: false,
-  players: [
-    { name: 'P1', cpu: false },
-    { name: 'P2', cpu: false },
-  ],
+  roundWinner: -1,
+  player1IsX: true,
+  player2IsCpu: true,
+  players: ['YOU', 'CPU'],
   currentPlayer: 0,
   score: {
     x: 0,
@@ -59,17 +58,39 @@ const gameSlice = createSlice({
       state.player1IsX = action.payload;
     },
     startGame(state, action) {
-      state.players = action.payload;
+      const { player2IsCpu } = action.payload;
+
+      if (state.player1IsX && player2IsCpu) {
+        state.players = ['YOU', 'CPU'];
+      }
+      if (!state.player1IsX && player2IsCpu) {
+        state.players = ['CPU', 'YOU'];
+      }
+      if (state.player1IsX && !player2IsCpu) {
+        state.players = ['P1', 'P2'];
+      }
+      if (!state.player1IsX && !player2IsCpu) {
+        state.players = ['P2', 'P1'];
+      }
+
+      state.player2IsCpu = player2IsCpu;
       state.gameState = GameState.Playing;
     },
     roundEnding(state, action) {
       if (action.payload.length > 0) {
         const currentMark = state.currentPlayer === 0 ? GameBoxState.X : GameBoxState.O;
-        if (currentMark === GameBoxState.X) state.score.x++;
-        if (currentMark === GameBoxState.O) state.score.o++;
+        if (currentMark === GameBoxState.X) {
+          state.score.x++;
+          state.roundWinner = 0;
+        }
+        if (currentMark === GameBoxState.O) {
+          state.score.o++;
+          state.roundWinner = 1;
+        }
         state.filledCoords = action.payload;
       } else {
         state.score.tie++;
+        state.roundWinner = -1;
       }
       state.gameState = GameState.RoundEnding;
     },
@@ -100,6 +121,8 @@ const gameSlice = createSlice({
 
 export const { addMove, nextRound, endRound, nextPlayer, roundEnding, setPlayerIsX, startGame, cancelRestart, restartGame, quitGame } = gameSlice.actions;
 
-export const getIsCurPlayerCpu = (state: RootState) => state.game.players[state.game.currentPlayer].cpu;
+export const getIsCurPlayerCpu = (state: RootState) =>
+  (state.game.currentPlayer === 1 && state.game.player2IsCpu && state.game.player1IsX) ||
+  (state.game.currentPlayer === 0 && !state.game.player1IsX && state.game.player2IsCpu);
 
 export default gameSlice.reducer;

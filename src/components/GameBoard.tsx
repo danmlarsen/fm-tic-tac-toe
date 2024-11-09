@@ -1,8 +1,8 @@
-import GameBox from './GameBox';
+import GameBoardCell from './GameBoardCell';
 import { addMove, getIsCurPlayerCpu } from '../store/gameSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 
-export default function GameBoxGrid() {
+export default function GameBoard() {
   const { boardState } = useAppSelector(state => state.game);
   const isCurPlayerCpu = useAppSelector(getIsCurPlayerCpu);
   const filledBoxes = useAppSelector(state => state.game.filledCoords);
@@ -22,7 +22,12 @@ export default function GameBoxGrid() {
     <div className="grid grid-cols-3 grid-rows-3 gap-5">
       {boardState.map((row, rowIdx) =>
         row.map((col, colIdx) => (
-          <GameBox key={`${rowIdx}, ${colIdx}`} state={col} onClick={() => handleClick({ x: rowIdx, y: colIdx })} fill={getIsFilled({ rowIdx, colIdx })} />
+          <GameBoardCell
+            key={`${rowIdx}, ${colIdx}`}
+            state={col}
+            onClick={() => handleClick({ x: rowIdx, y: colIdx })}
+            fill={getIsFilled({ rowIdx, colIdx })}
+          />
         ))
       )}
     </div>
