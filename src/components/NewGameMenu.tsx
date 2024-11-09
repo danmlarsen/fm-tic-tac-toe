@@ -1,13 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
-import Box from '../ui/Box';
 import Button, { ButtonColor, ButtonType } from '../ui/Button';
 import Header from './Header';
 import { startGame } from '../store/gameSlice';
-import MarkToggle from './MarkToggle';
+import MarkSelect from './MarkSelect';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 export default function NewGameMenu() {
-  const { player1IsX: isX } = useSelector(state => state.game);
-  const dispatch = useDispatch();
+  const { player1IsX: isX } = useAppSelector(state => state.game);
+  const dispatch = useAppDispatch();
 
   function startGameVsCPU() {
     if (isX) {
@@ -48,11 +47,7 @@ export default function NewGameMenu() {
   return (
     <div className="space-y-8">
       <Header />
-      <Box>
-        <h1 className="uppercase">Pick player 1's mark</h1>
-        <MarkToggle />
-        <p className="uppercase">Remember: X Goes first</p>
-      </Box>
+      <MarkSelect />
       <div className="space-y-4">
         <Button type={ButtonType.Primary} color={ButtonColor.yellow} onClick={startGameVsCPU}>
           New game (vs cpu)

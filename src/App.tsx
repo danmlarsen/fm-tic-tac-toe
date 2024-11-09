@@ -1,10 +1,10 @@
-import { useSelector } from 'react-redux';
 import Game from './components/Game';
 import NewGameMenu from './components/NewGameMenu';
 import { GameState } from './store/gameSlice';
+import { useAppSelector } from './store/hooks';
 
 function App() {
-  const { gameState } = useSelector(state => state.game);
+  const { gameState } = useAppSelector(state => state.game);
 
   return (
     <div className="min-h-screen grid place-items-center text-center">

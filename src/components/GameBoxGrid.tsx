@@ -1,14 +1,14 @@
 import GameBox from './GameBox';
-import { useDispatch, useSelector } from 'react-redux';
 import { addMove, getIsCurPlayerCpu } from '../store/gameSlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 export default function GameBoxGrid() {
-  const { boardState } = useSelector(state => state.game);
-  const isCurPlayerCpu = useSelector(getIsCurPlayerCpu);
-  const filledBoxes = useSelector(state => state.game.filledCoords);
-  const dispatch = useDispatch();
+  const { boardState } = useAppSelector(state => state.game);
+  const isCurPlayerCpu = useAppSelector(getIsCurPlayerCpu);
+  const filledBoxes = useAppSelector(state => state.game.filledCoords);
+  const dispatch = useAppDispatch();
 
-  function handleClick(pos) {
+  function handleClick(pos: { x: number; y: number }) {
     if (isCurPlayerCpu) return;
 
     const { x, y } = pos;

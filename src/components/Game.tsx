@@ -1,26 +1,18 @@
-import { useDispatch, useSelector } from 'react-redux';
 import GameBoxGrid from './GameBoxGrid';
 import GameScore from './GameScore';
 import Header from './Header';
-import { endRound, GameState } from '../store/gameSlice';
+import { GameState } from '../store/gameSlice';
 import RoundEndModal from './RoundEndModal';
 import RestartGameModal from './RestartGameModal';
-import { useEffect } from 'react';
-import { useCPU } from '../hooks/useCPU';
+import { useComputerPlayer } from '../hooks/useComputerPlayer';
+import { useGameController } from '../hooks/useGameController';
+import { useAppSelector } from '../store/hooks';
 
 export default function Game() {
-  const { gameState } = useSelector(state => state.game);
-  const dispatch = useDispatch();
+  const { gameState } = useAppSelector(state => state.game);
 
-  useCPU();
-
-  useEffect(() => {
-    if (gameState === GameState.RoundEnding) {
-      setTimeout(() => {
-        dispatch(endRound());
-      }, 1000);
-    }
-  }, [gameState, dispatch]);
+  useGameController();
+  useComputerPlayer();
 
   return (
     <>

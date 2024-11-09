@@ -1,8 +1,8 @@
-import { useSelector } from 'react-redux';
 import ScoreDisplay, { ScoreDisplayType } from './ScoreDisplay';
+import { useAppSelector } from '../store/hooks';
 
 export default function GameScore() {
-  const { players, score } = useSelector(state => state.game);
+  const { players, score } = useAppSelector(state => state.game);
 
   return (
     <div className="grid grid-cols-3 gap-5">

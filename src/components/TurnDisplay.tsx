@@ -2,10 +2,10 @@ import Box from '../ui/Box';
 
 import IconX from '../assets/icon-x.svg';
 import IconO from '../assets/icon-o.svg';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../store/hooks';
 
 export default function TurnDisplay() {
-  const currentPlayer = useSelector(state => state.game.currentPlayer);
+  const currentPlayer = useAppSelector(state => state.game.currentPlayer);
   const isX = currentPlayer === 0;
 
   return (
