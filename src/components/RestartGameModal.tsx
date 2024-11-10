@@ -9,8 +9,8 @@ export default function RestartGameModal() {
   return (
     <Modal>
       <div className="flex flex-col justify-center items-center space-y-8">
-        <h1 className="uppercase text-xl">Restart game?</h1>
-        <div className="space-x-4">
+        <h1 className="uppercase text-lg sm:text-xl">Restart game?</h1>
+        <div className="flex gap-4">
           <Button type="Secondary" color="Silver" onClick={() => dispatch(cancelRestart())}>
             No, cancel
           </Button>

@@ -37,6 +37,14 @@ export default {
       sans: ['Outfit', ...defaultTheme.fontFamily.sans],
     },
     fontSize: {
+      xs: [
+        '0.75rem',
+        {
+          lineHeight: '1.1',
+          letterSpacing: '0.88px',
+          fontWeight: 500,
+        },
+      ],
       base: [
         '0.875rem',
         {
@@ -73,6 +81,14 @@ export default {
           fontWeight: 700,
         },
       ],
+    },
+    borderRadius: {
+      sm: '0.3125rem',
+      md: '0.625rem',
+      lg: '0.9375rem',
+    },
+    screens: {
+      sm: '520px',
     },
   },
   plugins: [],

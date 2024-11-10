@@ -10,9 +10,10 @@ type AppProps = {
   state?: BoardCellState;
   onClick: (event: React.MouseEvent) => void;
   fill: boolean;
+  label: string;
 };
 
-export default function GameBoardCell({ state = BoardCellState.Empty, onClick, fill }: AppProps) {
+export default function GameBoardCell({ state = BoardCellState.Empty, onClick, fill, label }: AppProps) {
   const { currentPlayer, gameState } = useAppSelector(state => state.game);
   const isCurPlayerCpu = useAppSelector(getIsCurPlayerCpu);
 
@@ -20,19 +21,36 @@ export default function GameBoardCell({ state = BoardCellState.Empty, onClick, f
   if (fill) fillBg = state === BoardCellState.X ? 'bg-blue-light shadow-blue-dark' : 'bg-yellow-light shadow-yellow-dark';
 
   return (
-    <button className={`size-24 rounded-2xl shadow-inner grid place-items-center group ${fillBg}`} onClick={onClick}>
+    <button
+      className={`before:block before:pt-[100%] rounded-md sm:rounded-lg shadow-inner relative group ${fillBg}`}
+      onClick={onClick}
+      disabled={isCurPlayerCpu}
+      aria-label={label}
+    >
       {state !== BoardCellState.Empty ? (
         <>
-          {state === BoardCellState.X && <IconX className={`size-10 ${fill ? 'fill-navy-dark' : 'fill-blue-light'}`} />}
-          {state === BoardCellState.O && <IconO className={`size-10 ${fill ? 'fill-navy-dark' : 'fill-yellow-light'}`} />}
+          {state === BoardCellState.X && (
+            <IconX
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/5 h-2/5 min-w-10 sm:size-16 ${
+                fill ? 'fill-navy-dark' : 'fill-blue-light'
+              }`}
+            />
+          )}
+          {state === BoardCellState.O && (
+            <IconO
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/5 h-2/5 min-w-10 sm:size-16 ${
+                fill ? 'fill-navy-dark' : 'fill-yellow-light'
+              }`}
+            />
+          )}
         </>
       ) : (
         !isCurPlayerCpu &&
         gameState === GameState.Playing &&
         (currentPlayer === 0 ? (
-          <IconXOutline className="stroke-blue-light size-10 opacity-0 group-hover:opacity-100 transition duration-300" />
+          <IconXOutline className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/5 h-2/5 min-w-10 sm:size-16  stroke-blue-light size-10 opacity-0 group-hover:opacity-100 transition duration-300" />
         ) : (
-          <IconOOutline className="stroke-yellow-light size-10 opacity-0 group-hover:opacity-100 transition duration-300" />
+          <IconOOutline className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/5 h-2/5 min-w-10 sm:size-16 stroke-yellow-light size-10 opacity-0 group-hover:opacity-100 transition duration-300" />
         ))
       )}
     </button>

@@ -1,22 +1,30 @@
 type AppProps = {
   children: React.ReactNode;
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  type?: 'Primary' | 'Secondary';
+  type?: 'Primary' | 'Secondary' | 'Tertiary';
   color?: 'Yellow' | 'Blue' | 'Silver';
+  className?: string;
   disabled?: boolean;
+  label?: string;
 };
 
-export default function Button({ children, onClick, type = 'Primary', color = 'Yellow', disabled = false }: AppProps) {
+export default function Button({ children, onClick, type = 'Primary', color = 'Yellow', className = '', disabled = false, label }: AppProps) {
   let classes = '';
 
-  if (type === 'Primary') classes += 'pb-6 w-full text-md shadow-inner ';
-  if (type === 'Secondary') classes += 'px-4 pb-5 text-sm shadow-inner-sm ';
+  if (type === 'Primary') classes += 'h-14 sm:h-[67px] px-4 pb-2 w-full text-sm shadow-inner rounded-lg md:text-md ';
+  if (type === 'Secondary') classes += 'h-[52px] px-4 text-sm shadow-inner-sm rounded-md ';
+  if (type === 'Tertiary') classes += 'text-sm shadow-inner-sm rounded-md ';
   if (color === 'Yellow') classes += 'shadow-yellow-dark bg-yellow-light hover:bg-yellow-hover ';
   if (color === 'Blue') classes += 'shadow-blue-dark bg-blue-light hover:bg-blue-hover ';
   if (color === 'Silver') classes += 'shadow-silver-darker bg-silver-dark hover:bg-silver-light ';
 
   return (
-    <button className={`${classes} uppercase rounded-2xl font-bold text-navy-dark pt-4 transition duration-300 `} onClick={onClick} disabled={disabled}>
+    <button
+      className={`${className} ${classes} uppercase font-bold text-navy-dark transition duration-300 flex items-center justify-center `}
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={label}
+    >
       {children}
     </button>
   );

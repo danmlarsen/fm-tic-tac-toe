@@ -20,17 +20,21 @@ export default function RoundEndModal() {
     <Modal>
       <div className="grid place-items-center">
         <div className="grid gap-4">
-          {roundWinner !== -1 && <p>{message}</p>}
-          <div className="flex items-center justify-center gap-2">
+          {roundWinner !== -1 && <p className="sm:text-sm">{message}</p>}
+          <div
+            className={`flex items-center justify-center gap-2 sm:gap-6 ${
+              roundWinner === 0 ? 'text-blue-light' : roundWinner === 1 ? 'text-yellow-light' : ''
+            }`}
+          >
             {roundWinner !== -1 && (
-              <div className="size-10">
-                {roundWinner === 0 && <IconX />}
-                {roundWinner === 1 && <IconO />}
-              </div>
+              <>
+                {roundWinner === 0 && <IconX className="size-7 sm:size-16 fill-current" />}
+                {roundWinner === 1 && <IconO className="size-7 sm:size-16 fill-current" />}
+              </>
             )}
-            <h1 className="text-lg text-center">{roundWinner === -1 ? 'Round tied' : 'Takes the round'}</h1>
+            <h1 className="text-lg sm:text-xl text-center">{roundWinner === -1 ? 'Round tied' : 'Takes the round'}</h1>
           </div>
-          <div className="flex justify-center gap-4">
+          <div className="flex justify-center gap-4 mt-2">
             <Button type="Secondary" onClick={() => dispatch(quitGame())}>
               Quit
             </Button>

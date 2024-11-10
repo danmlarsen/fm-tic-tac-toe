@@ -27,6 +27,7 @@ export default function GameBoard() {
             state={col}
             onClick={() => handleClick({ x: rowIdx, y: colIdx })}
             fill={getIsFilled({ rowIdx, colIdx })}
+            label={`Board row: ${rowIdx + 1}, column: ${colIdx + 1}`}
           />
         ))
       )}

@@ -8,8 +8,10 @@ export default function Header() {
   const { gameState } = useAppSelector(state => state.game);
 
   return (
-    <header className={`flex items-center ${gameState === GameState.NewGame ? 'justify-center' : 'justify-between'}`}>
-      <Logo />
+    <header className={`grid items-center ${gameState === GameState.NewGame ? ' grid-cols-1' : 'grid-cols-3'}`}>
+      <div className={`${gameState === GameState.NewGame && 'justify-self-center'}`}>
+        <Logo />
+      </div>
       {gameState !== GameState.NewGame && (
         <>
           <TurnDisplay />

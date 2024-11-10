@@ -14,7 +14,7 @@ export default function MarkButton({ mark }: AppProps) {
 
   return (
     <button
-      className={`flex justify-center rounded-lg py-2 transition duration-300 ${
+      className={`flex items-center justify-center rounded-md h-[54px] transition duration-300 ${
         (player1IsX && mark === 'X') || (!player1IsX && mark === 'O') ? 'bg-silver-light' : 'hover:bg-navy-semidark'
       }  `}
       onClick={() => dispatch(setPlayerIsX(mark === 'X'))}

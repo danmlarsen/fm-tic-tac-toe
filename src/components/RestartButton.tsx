@@ -9,7 +9,14 @@ export default function RestartButton() {
   const dispatch = useDispatch();
 
   return (
-    <Button onClick={() => dispatch(restartGame())} type="Secondary" color="Silver" disabled={gameState !== GameState.Playing}>
+    <Button
+      className="size-10 justify-self-end sm:size-[52px]"
+      onClick={() => dispatch(restartGame())}
+      type="Tertiary"
+      color="Silver"
+      disabled={gameState !== GameState.Playing}
+      label="Restart game button"
+    >
       <img className="size-4" src={IconRestart} alt="Restart icon" />
     </Button>
   );
