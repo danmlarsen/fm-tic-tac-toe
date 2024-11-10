@@ -1,7 +1,8 @@
-import OIcon from '../ui/OIcon';
-import XIcon from '../ui/XIcon';
 import { setPlayerIsX } from '../store/gameSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
+
+import IconX from '../ui/IconX';
+import IconO from '../ui/IconO';
 
 type AppProps = {
   mark: 'X' | 'O';
@@ -19,9 +20,9 @@ export default function MarkButton({ mark }: AppProps) {
       onClick={() => dispatch(setPlayerIsX(mark === 'X'))}
     >
       {mark === 'X' ? (
-        <XIcon className={`size-8 ${player1IsX ? 'fill-navy-semidark' : 'fill-silver-light'}`} />
+        <IconX className={`size-8 ${player1IsX ? 'fill-navy-semidark' : 'fill-silver-light'}`} />
       ) : (
-        <OIcon className={`size-8 ${player1IsX ? 'fill-silver-light' : 'fill-navy-semidark'}`} />
+        <IconO className={`size-8 ${player1IsX ? 'fill-silver-light' : 'fill-navy-semidark'}`} />
       )}
     </button>
   );

@@ -2,7 +2,7 @@ type AppProps = {
   className?: string;
 };
 
-export default function XIconOutline({ className = 'stroke-blue-light size-10' }: AppProps) {
+export default function IconXOutline({ className = 'stroke-blue-light size-10' }: AppProps) {
   return (
     <svg className={className} viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
       <path

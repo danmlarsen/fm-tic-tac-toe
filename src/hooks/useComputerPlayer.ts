@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { addMove, GameState, getIsCurPlayerCpu } from '../store/gameSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { getEmptyCells } from '../utils/utils';
+import { CPU_MOVE_DELAY_SECONDS } from '../utils/constants';
 
 function getNextMove(boardState: number[][]) {
   const emptyCells = getEmptyCells(boardState);
@@ -22,7 +23,7 @@ export function useComputerPlayer() {
 
         const nextMove = getNextMove(boardState);
         dispatch(addMove(nextMove));
-      }, 1000);
+      }, CPU_MOVE_DELAY_SECONDS * 1000);
     }
   }, [isCurPlayerCpu, dispatch, boardState, gameState]);
 }

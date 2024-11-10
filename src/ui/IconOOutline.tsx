@@ -2,7 +2,7 @@ type AppProps = {
   className?: string;
 };
 
-export default function OIconOutline({ className = 'fill-yellow-light size-10' }: AppProps) {
+export default function IconOOutline({ className = 'fill-yellow-light size-10' }: AppProps) {
   return (
     <svg className={className} viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
       <path

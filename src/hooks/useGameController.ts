@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { endRound, GameState, nextPlayer, roundEnding } from '../store/gameSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { boardIsFull, checkForVictory } from '../utils/utils';
+import { NEXTPLAYER_DELAY_SECONDS, ROUNDEND_DELAY_SECONDS } from '../utils/constants';
 
 export function useGameController() {
   const { gameState, boardState, currentPlayer } = useAppSelector(state => state.game);
@@ -17,14 +18,14 @@ export function useGameController() {
       } else {
         setTimeout(() => {
           dispatch(nextPlayer());
-        }, 500);
+        }, NEXTPLAYER_DELAY_SECONDS * 1000);
       }
     }
 
     if (gameState === GameState.RoundEnding) {
       setTimeout(() => {
         dispatch(endRound());
-      }, 1000);
+      }, ROUNDEND_DELAY_SECONDS * 1000);
     }
   }, [gameState, boardState, currentPlayer, dispatch]);
 }

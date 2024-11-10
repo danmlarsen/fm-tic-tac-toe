@@ -2,7 +2,7 @@ type AppProps = {
   className?: string;
 };
 
-export default function XIcon({ className = 'fill-blue-light size-10' }: AppProps) {
+export default function IconX({ className = 'fill-blue-light size-10' }: AppProps) {
   return (
     <svg className={className} viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
       <path

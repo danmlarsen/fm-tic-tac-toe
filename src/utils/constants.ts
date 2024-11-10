@@ -1,0 +1,3 @@
+export const CPU_MOVE_DELAY_SECONDS = 1;
+export const NEXTPLAYER_DELAY_SECONDS = 0.5;
+export const ROUNDEND_DELAY_SECONDS = 1;
