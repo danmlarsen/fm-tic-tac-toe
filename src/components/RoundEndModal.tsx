@@ -1,13 +1,13 @@
 import Button from '../ui/Button';
 import Modal from '../ui/Modal';
-import { nextRound, quitGame } from '../store/gameSlice';
+import { GameState, nextRound, quitGame } from '../store/gameSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 import IconX from '../ui/IconX';
 import IconO from '../ui/IconO';
 
 export default function RoundEndModal() {
-  const { roundWinner, player1IsX, player2IsCpu } = useAppSelector(state => state.game);
+  const { gameState, roundWinner, player1IsX, player2IsCpu } = useAppSelector(state => state.game);
   const dispatch = useAppDispatch();
 
   let message = '';
@@ -17,7 +17,7 @@ export default function RoundEndModal() {
   if (roundWinner === 1 && !player2IsCpu) message = `Player ${player1IsX ? '2' : '1'} wins!`;
 
   return (
-    <Modal>
+    <Modal isVisible={gameState === GameState.RoundEnd}>
       <div className="grid place-items-center">
         <div className="grid gap-4">
           {roundWinner !== -1 && <p className="sm:text-sm">{message}</p>}

@@ -1,29 +1,30 @@
-import GameScore from './GameScore';
-import Header from './Header';
-import { GameState } from '../store/gameSlice';
-import RoundEndModal from './RoundEndModal';
-import RestartGameModal from './RestartGameModal';
+import { AnimatePresence, motion } from 'framer-motion';
+
 import { useComputerPlayer } from '../hooks/useComputerPlayer';
 import { useGameController } from '../hooks/useGameController';
-import { useAppSelector } from '../store/hooks';
+
+import GameScore from './GameScore';
+import Header from './Header';
+import RoundEndModal from './RoundEndModal';
+import RestartGameModal from './RestartGameModal';
+
 import GameBoard from './GameBoard';
 
 export default function Game() {
-  const { gameState } = useAppSelector(state => state.game);
-
   useGameController();
   useComputerPlayer();
 
   return (
     <>
-      {gameState === GameState.RoundEnd && <RoundEndModal />}
-      {gameState === GameState.Restarting && <RestartGameModal />}
-
-      <div className="space-y-5">
-        <Header />
-        <GameBoard />
-        <GameScore />
-      </div>
+      <RoundEndModal />
+      <RestartGameModal />
+      <AnimatePresence mode="wait">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-5">
+          <Header />
+          <GameBoard />
+          <GameScore />
+        </motion.div>
+      </AnimatePresence>
     </>
   );
 }
