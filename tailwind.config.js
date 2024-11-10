@@ -30,6 +30,7 @@ export default {
       },
       boxShadow: {
         inner: 'inset 0 -8px 0 0',
+        'inner-sm': 'inset 0 -4px 0 0',
       },
     },
     fontFamily: {

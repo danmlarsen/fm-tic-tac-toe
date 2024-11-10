@@ -1,8 +1,8 @@
-import { GameBoxState } from '../components/GameBoardCell';
+import { BoardCellState } from '../store/gameSlice';
 
-export const isFull = (row: number[]) => row.every((val, _, arr: number[]) => val === arr[0] && val !== GameBoxState.Empty);
+export const isFull = (row: number[]) => row.every((val, _, arr: number[]) => val === arr[0] && val !== BoardCellState.Empty);
 export const getCol = (boardState: number[][], col: number) => boardState.map(row => row[col]);
-export const boardIsFull = (boardState: number[][]) => boardState.flat().every(box => box !== GameBoxState.Empty);
+export const boardIsFull = (boardState: number[][]) => boardState.flat().every(box => box !== BoardCellState.Empty);
 
 export function checkForVictory(boardState: number[][]) {
   let found: { x: number; y: number }[] = [];
@@ -25,13 +25,13 @@ export function checkForVictory(boardState: number[][]) {
     }
   });
 
-  if (boardState[0][0] !== GameBoxState.Empty && boardState[0][0] === boardState[1][1] && boardState[0][0] === boardState[2][2])
+  if (boardState[0][0] !== BoardCellState.Empty && boardState[0][0] === boardState[1][1] && boardState[0][0] === boardState[2][2])
     found = [
       { x: 0, y: 0 },
       { x: 1, y: 1 },
       { x: 2, y: 2 },
     ];
-  if (boardState[0][2] !== GameBoxState.Empty && boardState[0][2] === boardState[1][1] && boardState[0][2] === boardState[2][0])
+  if (boardState[0][2] !== BoardCellState.Empty && boardState[0][2] === boardState[1][1] && boardState[0][2] === boardState[2][0])
     found = [
       { x: 0, y: 2 },
       { x: 1, y: 1 },
@@ -45,7 +45,7 @@ export function getEmptyCells(boardState: number[][]) {
   const coordsArr: { x: number; y: number }[] = [];
   boardState.forEach((row, x) => {
     row.forEach((col, y) => {
-      if (col === GameBoxState.Empty) coordsArr.push({ x, y });
+      if (col === BoardCellState.Empty) coordsArr.push({ x, y });
     });
   });
   return coordsArr;

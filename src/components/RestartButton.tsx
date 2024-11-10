@@ -10,7 +10,7 @@ export default function RestartButton() {
 
   return (
     <Button onClick={() => dispatch(restartGame())} type={ButtonType.Secondary} color={ButtonColor.silver} disabled={gameState !== GameState.Playing}>
-      <img src={IconRestart} alt="Restart icon" />
+      <img className="size-4" src={IconRestart} alt="Restart icon" />
     </Button>
   );
 }

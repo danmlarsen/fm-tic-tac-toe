@@ -1,11 +1,5 @@
-export enum ScoreDisplayType {
-  X,
-  O,
-  Tie,
-}
-
 type AppProps = {
-  type: ScoreDisplayType;
+  type: 'X' | 'O' | 'TIE';
   score: number;
   playerName?: string;
 };
@@ -14,15 +8,15 @@ export default function ScoreDisplay({ type, score = 0, playerName = '' }: AppPr
   let classes = '';
   let player = '';
 
-  if (type === ScoreDisplayType.X) {
+  if (type === 'X') {
     classes += 'bg-blue-light shadow-bg-blue-dark ';
     player = 'X';
   }
-  if (type === ScoreDisplayType.O) {
+  if (type === 'O') {
     classes += 'bg-yellow-light shadow-bg-yellow-dark ';
     player = 'O';
   }
-  if (type === ScoreDisplayType.Tie) {
+  if (type === 'TIE') {
     classes += 'bg-silver-dark shadow-bg-silver-darker ';
     player = 'Ties';
   }

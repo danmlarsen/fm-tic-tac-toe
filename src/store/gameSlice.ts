@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { GameBoxState } from '../components/GameBoardCell';
 import { RootState } from './store';
 
 export enum GameState {
@@ -11,7 +10,8 @@ export enum GameState {
   Restarting,
 }
 
-export enum GameMark {
+export enum BoardCellState {
+  Empty,
   X,
   O,
 }
@@ -21,9 +21,9 @@ type filledCoords = { x: number; y: number };
 const initialState = {
   gameState: GameState.NewGame,
   boardState: [
-    [GameBoxState.Empty, GameBoxState.Empty, GameBoxState.Empty],
-    [GameBoxState.Empty, GameBoxState.Empty, GameBoxState.Empty],
-    [GameBoxState.Empty, GameBoxState.Empty, GameBoxState.Empty],
+    [BoardCellState.Empty, BoardCellState.Empty, BoardCellState.Empty],
+    [BoardCellState.Empty, BoardCellState.Empty, BoardCellState.Empty],
+    [BoardCellState.Empty, BoardCellState.Empty, BoardCellState.Empty],
   ],
   filledCoords: [] as filledCoords[],
   roundWinner: -1,
@@ -46,7 +46,7 @@ const gameSlice = createSlice({
       if (state.gameState !== GameState.Playing) return;
 
       const { x, y } = action.payload;
-      const currentMark = state.currentPlayer === 0 ? GameBoxState.X : GameBoxState.O;
+      const currentMark = state.currentPlayer === 0 ? BoardCellState.X : BoardCellState.O;
       state.boardState[x][y] = currentMark;
       state.gameState = GameState.TurnEnd;
     },
@@ -78,12 +78,12 @@ const gameSlice = createSlice({
     },
     roundEnding(state, action) {
       if (action.payload.length > 0) {
-        const currentMark = state.currentPlayer === 0 ? GameBoxState.X : GameBoxState.O;
-        if (currentMark === GameBoxState.X) {
+        const currentMark = state.currentPlayer === 0 ? BoardCellState.X : BoardCellState.O;
+        if (currentMark === BoardCellState.X) {
           state.score.x++;
           state.roundWinner = 0;
         }
-        if (currentMark === GameBoxState.O) {
+        if (currentMark === BoardCellState.O) {
           state.score.o++;
           state.roundWinner = 1;
         }
