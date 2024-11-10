@@ -43,12 +43,10 @@ const gameSlice = createSlice({
   initialState,
   reducers: {
     addMove(state, action) {
-      if (state.gameState !== GameState.Playing) return;
-
       const { x, y } = action.payload;
       const currentMark = state.currentPlayer === 0 ? BoardCellState.X : BoardCellState.O;
-      state.boardState[x][y] = currentMark;
       state.gameState = GameState.TurnEnd;
+      state.boardState[x][y] = currentMark;
     },
     nextPlayer(state) {
       state.currentPlayer = state.currentPlayer === 0 ? 1 : 0;

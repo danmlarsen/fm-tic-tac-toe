@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { addMove, GameState, getIsCurPlayerCpu } from '../store/gameSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { getEmptyCells } from '../utils/utils';
@@ -16,12 +16,16 @@ export function useComputerPlayer() {
   const gameState = useAppSelector(state => state.game.gameState);
   const dispatch = useAppDispatch();
 
+  const timeoutId = useRef(0);
+
   useEffect(() => {
     if (isCurPlayerCpu && gameState === GameState.Playing) {
-      setTimeout(() => {
-        if (gameState !== GameState.Playing) return;
+      const nextMove = getNextMove(boardState);
 
-        const nextMove = getNextMove(boardState);
+      if (timeoutId.current) clearTimeout(timeoutId.current);
+
+      timeoutId.current = setTimeout(() => {
+        if (!isCurPlayerCpu || gameState !== GameState.Playing) return;
         dispatch(addMove(nextMove));
       }, CPU_MOVE_DELAY_SECONDS * 1000);
     }
