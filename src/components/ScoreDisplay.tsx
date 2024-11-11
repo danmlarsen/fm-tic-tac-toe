@@ -22,7 +22,7 @@ export default function ScoreDisplay({ type, score = 0, playerName = '' }: AppPr
   }
 
   return (
-    <div className={`grid place-items-center text-center text-navy-dark text-xs sm:text-base rounded-md py-3 ${classes}`}>
+    <div className={`grid place-items-center text-center text-navy-dark text-xs sm:text-base rounded-md sm:rounded-lg py-3 ${classes}`}>
       <p className="uppercase">
         {player} {playerName && `(${playerName})`}
       </p>
