@@ -10,7 +10,7 @@ export default function RestartButton() {
 
   return (
     <Button
-      className="size-10 justify-self-end sm:size-[3.25rem]"
+      className="size-10 justify-self-end sm:size-[3.25rem] focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-light"
       onClick={() => dispatch(restartGame())}
       type="Tertiary"
       color="Silver"

@@ -20,7 +20,7 @@ export default function Button({ children, onClick, type = 'Primary', color = 'Y
 
   return (
     <button
-      className={`${className} ${classes} uppercase font-bold text-navy-dark transition duration-300 flex items-center justify-center `}
+      className={`${className} ${classes} uppercase font-bold text-navy-dark transition duration-300 flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-silver-light  `}
       onClick={onClick}
       disabled={disabled}
       aria-label={label}

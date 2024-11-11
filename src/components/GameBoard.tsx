@@ -1,6 +1,7 @@
-import GameBoardCell from './GameBoardCell';
 import { addMove, BoardCellState, GameState, getIsCurPlayerCpu } from '../store/gameSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
+
+import GameBoardCell from './GameBoardCell';
 
 export default function GameBoard() {
   const { boardState, gameState } = useAppSelector(state => state.game);
