@@ -15,6 +15,21 @@ type AppProps = {
   label: string;
 };
 
+const hoverVariant = {
+  rest: {
+    opacity: 0,
+    x: '-50%',
+    y: '-50%',
+    display: 'none',
+  },
+  hover: {
+    opacity: 1,
+    x: '-50%',
+    y: '-50%',
+    display: 'block',
+  },
+};
+
 export default function GameBoardCell({ state = BoardCellState.Empty, onClick, fill, label }: AppProps) {
   const { currentPlayer, gameState } = useAppSelector(state => state.game);
   const isCurPlayerCpu = useAppSelector(getIsCurPlayerCpu);
@@ -22,11 +37,12 @@ export default function GameBoardCell({ state = BoardCellState.Empty, onClick, f
   let fillBg = `bg-navy-semidark shadow-navy-darker`;
   if (fill) fillBg = state === BoardCellState.X ? 'bg-blue-light shadow-blue-dark' : 'bg-yellow-light shadow-yellow-dark';
 
-  const hoverClasses =
-    'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/5 h-2/5 min-w-10 sm:size-16 size-10 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition duration-300 ';
-
   return (
-    <button
+    <motion.button
+      initial="rest"
+      animate="rest"
+      whileHover="hover"
+      whileFocus="hover"
       className={`before:block before:pt-[100%] rounded-md sm:rounded-lg shadow-inner relative transition duration-300 group focus:outline-none focus:ring-2 ${
         currentPlayer === 0 ? 'ring-blue-light' : 'ring-yellow-light'
       } ${fillBg}`}
@@ -44,14 +60,12 @@ export default function GameBoardCell({ state = BoardCellState.Empty, onClick, f
           {state === BoardCellState.O && <IconO className={`  ${fill ? 'fill-navy-dark' : 'fill-yellow-light'}`} />}
         </motion.span>
       ) : (
-        !isCurPlayerCpu &&
-        gameState === GameState.Playing &&
-        (currentPlayer === 0 ? (
-          <IconXOutline className={`${hoverClasses} stroke-blue-light `} />
-        ) : (
-          <IconOOutline className={`${hoverClasses} stroke-yellow-light`} />
-        ))
+        <motion.span variants={hoverVariant} key={state} className="absolute top-1/2 left-1/2 w-2/5 h-2/5 min-w-10 sm:size-16 size-10">
+          {!isCurPlayerCpu &&
+            gameState === GameState.Playing &&
+            (currentPlayer === 0 ? <IconXOutline className={`stroke-blue-light `} /> : <IconOOutline className={`stroke-yellow-light`} />)}
+        </motion.span>
       )}
-    </button>
+    </motion.button>
   );
 }
