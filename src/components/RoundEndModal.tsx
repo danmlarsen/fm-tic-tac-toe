@@ -1,8 +1,8 @@
-import Button from '../ui/Button';
-import Modal from '../ui/Modal';
 import { GameState, nextRound, quitGame } from '../store/gameSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 
+import Button from '../ui/Button';
+import Modal from '../ui/Modal';
 import IconX from '../ui/IconX';
 import IconO from '../ui/IconO';
 

@@ -1,10 +1,10 @@
 import { AnimatePresence, motion } from 'framer-motion';
+import { useAppDispatch } from '../store/hooks';
+import { startGame } from '../store/gameSlice';
 
 import Button from '../ui/Button';
 import Header from './Header';
-import { startGame } from '../store/gameSlice';
 import MarkSelect from './MarkSelect';
-import { useAppDispatch } from '../store/hooks';
 
 export default function NewGameMenu() {
   const dispatch = useAppDispatch();

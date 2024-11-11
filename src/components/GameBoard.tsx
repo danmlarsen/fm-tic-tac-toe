@@ -18,7 +18,7 @@ export default function GameBoard() {
     dispatch(addMove({ x, y }));
   }
 
-  const getIsFilled = ({ rowIdx, colIdx }: { rowIdx: number; colIdx: number }) => filledBoxes.find(el => el.x === rowIdx && el.y === colIdx) !== undefined;
+  const getCellIsFilled = ({ rowIdx, colIdx }: { rowIdx: number; colIdx: number }) => filledBoxes.find(el => el.x === rowIdx && el.y === colIdx) !== undefined;
 
   return (
     <div className="grid grid-cols-3 grid-rows-3 gap-5">
@@ -28,7 +28,7 @@ export default function GameBoard() {
             key={`${rowIdx}, ${colIdx}`}
             state={col}
             onClick={() => handleClick({ x: rowIdx, y: colIdx })}
-            fill={getIsFilled({ rowIdx, colIdx })}
+            fill={getCellIsFilled({ rowIdx, colIdx })}
             label={`Board row: ${rowIdx + 1}, column: ${colIdx + 1}`}
           />
         ))

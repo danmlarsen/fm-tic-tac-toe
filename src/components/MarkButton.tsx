@@ -14,10 +14,11 @@ export default function MarkButton({ mark }: AppProps) {
 
   return (
     <button
-      className={`flex items-center justify-center rounded-md h-[54px] transition duration-300 ${
+      className={`flex items-center justify-center rounded-md h-[3.375rem] transition duration-300 ${
         (player1IsX && mark === 'X') || (!player1IsX && mark === 'O') ? 'bg-silver-light' : 'hover:bg-navy-semidark'
       }  `}
       onClick={() => dispatch(setPlayerIsX(mark === 'X'))}
+      aria-label={`Pick "${mark}" as Player 1 mark`}
     >
       {mark === 'X' ? (
         <IconX className={`size-8 ${player1IsX ? 'fill-navy-semidark' : 'fill-silver-light'}`} />

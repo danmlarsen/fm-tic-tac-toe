@@ -32,6 +32,9 @@ export default {
         inner: 'inset 0 -8px 0 0',
         'inner-sm': 'inset 0 -4px 0 0',
       },
+      maxWidth: {
+        md: '28.75rem',
+      },
     },
     fontFamily: {
       sans: ['Outfit', ...defaultTheme.fontFamily.sans],

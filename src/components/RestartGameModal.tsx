@@ -1,12 +1,12 @@
-import { useDispatch } from 'react-redux';
+import { cancelRestart, GameState, quitGame } from '../store/gameSlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+
 import Button from '../ui/Button';
 import Modal from '../ui/Modal';
-import { cancelRestart, GameState, quitGame } from '../store/gameSlice';
-import { useAppSelector } from '../store/hooks';
 
 export default function RestartGameModal() {
   const { gameState } = useAppSelector(state => state.game);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <>

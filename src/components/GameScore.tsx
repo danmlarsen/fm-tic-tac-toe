@@ -5,7 +5,7 @@ export default function GameScore() {
   const { players, score } = useAppSelector(state => state.game);
 
   return (
-    <div className="grid grid-cols-3 gap-5 min-h-16 sm:min-h-[72px]">
+    <div className="grid grid-cols-3 gap-5 min-h-16 sm:min-h-[4.5rem]">
       <ScoreDisplay score={score.x} type="X" playerName={players[0]} />
       <ScoreDisplay score={score.tie} type="TIE" />
       <ScoreDisplay score={score.o} type="O" playerName={players[1]} />

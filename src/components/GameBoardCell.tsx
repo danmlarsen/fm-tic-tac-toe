@@ -38,7 +38,7 @@ export default function GameBoardCell({ state = BoardCellState.Empty, onClick, f
         <motion.span
           initial={{ opacity: 0, scale: 0.75, x: '-50%', y: '-50%' }}
           animate={{ opacity: 1, scale: 1, x: '-50%', y: '-50%' }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/5 h-2/5 min-w-10 sm:size-16"
+          className="absolute top-1/2 left-1/2 w-2/5 h-2/5 min-w-10 sm:size-16"
         >
           {state === BoardCellState.X && <IconX className={`  ${fill ? 'fill-navy-dark' : 'fill-blue-light'}`} />}
           {state === BoardCellState.O && <IconO className={`  ${fill ? 'fill-navy-dark' : 'fill-yellow-light'}`} />}

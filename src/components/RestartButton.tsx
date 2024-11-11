@@ -1,16 +1,16 @@
+import { GameState, restartGame } from '../store/gameSlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+
 import Button from '../ui/Button';
 import IconRestart from '../assets/icon-restart.svg';
-import { useDispatch } from 'react-redux';
-import { GameState, restartGame } from '../store/gameSlice';
-import { useAppSelector } from '../store/hooks';
 
 export default function RestartButton() {
   const { gameState } = useAppSelector(state => state.game);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <Button
-      className="size-10 justify-self-end sm:size-[52px]"
+      className="size-10 justify-self-end sm:size-[3.25rem]"
       onClick={() => dispatch(restartGame())}
       type="Tertiary"
       color="Silver"
