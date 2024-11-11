@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="min-h-screen grid items-center text-center p-6">
-      <div className="max-w-md w-full mx-auto">{gameState === GameState.NewGame ? <NewGameMenu /> : <Game />}</div>
+      <main className="max-w-md w-full mx-auto">{gameState === GameState.NewGame ? <NewGameMenu /> : <Game />}</main>
     </div>
   );
 }

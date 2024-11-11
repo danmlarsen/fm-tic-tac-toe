@@ -20,7 +20,7 @@ export enum BoardCellState {
 type filledCoords = { x: number; y: number };
 
 const initialState = {
-  gameState: GameState.NewGame,
+  gameState: GameState.Playing,
   boardState: [
     [BoardCellState.Empty, BoardCellState.Empty, BoardCellState.Empty],
     [BoardCellState.Empty, BoardCellState.Empty, BoardCellState.Empty],
