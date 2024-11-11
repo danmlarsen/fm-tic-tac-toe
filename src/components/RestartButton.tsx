@@ -17,7 +17,7 @@ export default function RestartButton() {
       disabled={gameState !== GameState.Playing}
       label="Restart game button"
     >
-      <img className="size-4" src={IconRestart} alt="Restart icon" />
+      <img className="size-4 sm:size-5" src={IconRestart} alt="Restart icon" />
     </Button>
   );
 }

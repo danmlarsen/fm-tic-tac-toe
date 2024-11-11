@@ -16,8 +16,8 @@ export default function Game() {
 
   return (
     <>
-      <RoundEndModal />
       <RestartGameModal />
+      <RoundEndModal />
       <AnimatePresence mode="wait">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-5">
           <Header />

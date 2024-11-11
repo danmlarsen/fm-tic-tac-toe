@@ -4,6 +4,7 @@ import { RootState } from './store';
 export enum GameState {
   NewGame,
   Playing,
+  TurnEnding,
   TurnEnd,
   RoundEnding,
   RoundEnd,
@@ -45,11 +46,14 @@ const gameSlice = createSlice({
     addMove(state, action) {
       const { x, y } = action.payload;
       const currentMark = state.currentPlayer === 0 ? BoardCellState.X : BoardCellState.O;
-      state.gameState = GameState.TurnEnd;
+      state.gameState = GameState.TurnEnding;
       state.boardState[x][y] = currentMark;
     },
     nextPlayer(state) {
       state.currentPlayer = state.currentPlayer === 0 ? 1 : 0;
+      state.gameState = GameState.TurnEnd;
+    },
+    startNextTurn(state) {
       state.gameState = GameState.Playing;
     },
     setPlayerIsX(state, action) {
@@ -117,7 +121,8 @@ const gameSlice = createSlice({
   },
 });
 
-export const { addMove, nextRound, endRound, nextPlayer, roundEnding, setPlayerIsX, startGame, cancelRestart, restartGame, quitGame } = gameSlice.actions;
+export const { addMove, nextRound, endRound, nextPlayer, startNextTurn, roundEnding, setPlayerIsX, startGame, cancelRestart, restartGame, quitGame } =
+  gameSlice.actions;
 
 export const getIsCurPlayerCpu = (state: RootState) =>
   (state.game.currentPlayer === 1 && state.game.player2IsCpu && state.game.player1IsX) ||

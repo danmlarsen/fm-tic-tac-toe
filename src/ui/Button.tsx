@@ -11,7 +11,7 @@ type AppProps = {
 export default function Button({ children, onClick, type = 'Primary', color = 'Yellow', className = '', disabled = false, label }: AppProps) {
   let classes = '';
 
-  if (type === 'Primary') classes += 'h-14 sm:h-[67px] px-4 pb-2 w-full text-sm shadow-inner rounded-lg md:text-md ';
+  if (type === 'Primary') classes += 'h-14 sm:h-[67px] px-4 pb-2 w-full text-sm shadow-inner rounded-lg sm:text-md ';
   if (type === 'Secondary') classes += 'h-[52px] px-4 text-sm shadow-inner-sm rounded-md ';
   if (type === 'Tertiary') classes += 'text-sm shadow-inner-sm rounded-md ';
   if (color === 'Yellow') classes += 'shadow-yellow-dark bg-yellow-light hover:bg-yellow-hover ';

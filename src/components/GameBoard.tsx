@@ -1,17 +1,19 @@
 import GameBoardCell from './GameBoardCell';
-import { addMove, getIsCurPlayerCpu } from '../store/gameSlice';
+import { addMove, BoardCellState, GameState, getIsCurPlayerCpu } from '../store/gameSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 export default function GameBoard() {
-  const { boardState } = useAppSelector(state => state.game);
+  const { boardState, gameState } = useAppSelector(state => state.game);
   const isCurPlayerCpu = useAppSelector(getIsCurPlayerCpu);
   const filledBoxes = useAppSelector(state => state.game.filledCoords);
   const dispatch = useAppDispatch();
 
   function handleClick(pos: { x: number; y: number }) {
-    if (isCurPlayerCpu) return;
+    if (gameState !== GameState.Playing || isCurPlayerCpu) return;
 
     const { x, y } = pos;
+
+    if (boardState[x][y] !== BoardCellState.Empty) return;
 
     dispatch(addMove({ x, y }));
   }

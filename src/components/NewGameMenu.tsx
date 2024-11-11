@@ -11,10 +11,10 @@ export default function NewGameMenu() {
 
   return (
     <AnimatePresence mode="wait">
-      <motion.div key="NewGameMenu" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-8">
+      <motion.div key="NewGameMenu" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-8 sm:space-y-10">
         <Header />
         <MarkSelect />
-        <div className="space-y-4">
+        <div className="space-y-4 sm:space-y-5">
           <Button type="Primary" color="Yellow" onClick={() => dispatch(startGame({ player2IsCpu: true }))}>
             New game (vs cpu)
           </Button>

@@ -22,29 +22,34 @@ export default function GameBoardCell({ state = BoardCellState.Empty, onClick, f
   let fillBg = `bg-navy-semidark shadow-navy-darker`;
   if (fill) fillBg = state === BoardCellState.X ? 'bg-blue-light shadow-blue-dark' : 'bg-yellow-light shadow-yellow-dark';
 
+  const hoverClasses =
+    'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/5 h-2/5 min-w-10 sm:size-16 size-10 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition duration-300 ';
+
   return (
     <button
-      className={`before:block before:pt-[100%] rounded-md sm:rounded-lg shadow-inner relative transition duration-300 group ${fillBg}`}
+      className={`before:block before:pt-[100%] rounded-md sm:rounded-lg shadow-inner relative transition duration-300 group focus:outline-none focus:ring-2 ${
+        currentPlayer === 0 ? 'ring-blue-light' : 'ring-yellow-light'
+      } ${fillBg}`}
       onClick={onClick}
-      disabled={isCurPlayerCpu}
+      disabled={isCurPlayerCpu || state !== BoardCellState.Empty}
       aria-label={label}
     >
       {state !== BoardCellState.Empty ? (
-        <motion.div
+        <motion.span
           initial={{ opacity: 0, scale: 0.75, x: '-50%', y: '-50%' }}
           animate={{ opacity: 1, scale: 1, x: '-50%', y: '-50%' }}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/5 h-2/5 min-w-10 sm:size-16"
         >
           {state === BoardCellState.X && <IconX className={`  ${fill ? 'fill-navy-dark' : 'fill-blue-light'}`} />}
           {state === BoardCellState.O && <IconO className={`  ${fill ? 'fill-navy-dark' : 'fill-yellow-light'}`} />}
-        </motion.div>
+        </motion.span>
       ) : (
         !isCurPlayerCpu &&
         gameState === GameState.Playing &&
         (currentPlayer === 0 ? (
-          <IconXOutline className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/5 h-2/5 min-w-10 sm:size-16  stroke-blue-light size-10 opacity-0 group-hover:opacity-100 transition duration-300" />
+          <IconXOutline className={`${hoverClasses} stroke-blue-light `} />
         ) : (
-          <IconOOutline className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/5 h-2/5 min-w-10 sm:size-16 stroke-yellow-light size-10 opacity-0 group-hover:opacity-100 transition duration-300" />
+          <IconOOutline className={`${hoverClasses} stroke-yellow-light`} />
         ))
       )}
     </button>
