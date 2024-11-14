@@ -9,8 +9,12 @@ export function useGameController() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(startNextTurn());
-  }, [dispatch]);
+    if (gameState === GameState.TurnEnd) {
+      setTimeout(() => {
+        dispatch(startNextTurn());
+      }, NEXTPLAYER_DELAY_SECONDS * 1000);
+    }
+  }, [gameState, dispatch]);
 
   useEffect(() => {
     if (gameState === GameState.TurnEnding) {
@@ -21,9 +25,6 @@ export function useGameController() {
         dispatch(roundEnding({}));
       } else {
         dispatch(nextPlayer());
-        setTimeout(() => {
-          dispatch(startNextTurn());
-        }, NEXTPLAYER_DELAY_SECONDS * 1000);
       }
     }
 
